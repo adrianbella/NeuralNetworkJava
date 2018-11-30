@@ -9,6 +9,7 @@ public class Neuron {
     private final double bias;
     private final String activation;
     private final boolean isInputNeuron;
+    private final double alpha = 0.01;
 
     private double[] weights;
     private double output;
@@ -36,18 +37,23 @@ public class Neuron {
           inputs = normalizeInput(inputs);
         }
 
-        if(activation == "sigmoid"){
 
-            for(int i = 0; i < inputs.length; i++){
-                sum += inputs[i] * weights[i];
-            }
-
-            net = sum + bias;
-        }else if (activation == "relu"){
-            //TODO: megírni a megfelelő aktivációs függvényt!
+        for(int i = 0; i < inputs.length; i++){
+            sum += inputs[i] * weights[i];
         }
 
-        output = 1 / (1 + Math.exp(-net));
+        net = sum + bias;
+
+        if(activation == "sigmoid"){
+
+            output = 1 / (1 + Math.exp(-net));
+
+        }else if (activation == "reLu"){
+
+            output = Math.max(net*alpha,net);
+        }
+
+
     }
 
     private double[] normalizeInput(double[] inputs){
@@ -78,6 +84,25 @@ public class Neuron {
         return inputs;
     }
 
+    public double getDerivative() {
+        double derivative = 0.0;
+
+        if(activation.equals("sigmoid")){
+
+            derivative = output * (1-output);
+
+        }else if(activation.equals("reLu")){
+
+            if(output < 0){
+                derivative = alpha;
+            }if(output >= 0){
+                derivative = 1;
+            }
+        }
+
+            return derivative;
+    }
+
     public String getID() {
         return ID;
     }
@@ -96,9 +121,5 @@ public class Neuron {
 
     public void setOutput(double output) {
         this.output = output;
-    }
-
-    public double getDerivate() {
-        return output * (1-output);
     }
 }

@@ -40,7 +40,6 @@ public class NN {
         hiddenLayerInint();
     }
 
-
     private void hiddenLayerInint(){
 
         double[] hiddenLayerInitialWeights = new double[81];
@@ -55,6 +54,4 @@ public class NN {
             n = new Neuron(initialBias,hiddenLayerActivation,ID,true,hiddenLayerInitialWeights);
         }
     }
-
-
 }

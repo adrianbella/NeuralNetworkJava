@@ -16,13 +16,12 @@ public class Main {
 
             input = read();
 
-
-
-        } catch (IOException e){e.printStackTrace();}
-        catch (IllegalArgumentException ie){ie.printStackTrace();}
-
-
-
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        catch (IllegalArgumentException ie){
+            ie.printStackTrace();
+        }
     }
 
     public static List<String[]> read() throws IOException {
@@ -31,14 +30,14 @@ public class Main {
 
         try (InputStreamReader instream = new InputStreamReader(System.in);
              BufferedReader buffer = new BufferedReader(instream)){
-            String in;
+                String in;
 
-            while ((in = buffer.readLine()) != null) {
+                while ((in = buffer.readLine()) != null) {
 
-                str = in.split("\t");
-                strInput.add(str);
+                    str = in.split("\t");
+                    strInput.add(str);
 
-            }
+                }
         }catch (Exception e) {
             e.printStackTrace();
         }
